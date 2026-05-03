@@ -1,36 +1,26 @@
 package com.mycompany.model;
 
-import com.mycompany.model.OrdemServico.Status;
+public class Servico {
 
-public class OrdemExecutada {
     private static int count;
     private int id;
-    
+
     private String descricao;
     private int tempoPrevisto;
     private int tempoReal;
     private double valorUnitario;
 
-    public OrdemExecutada(String descricao, int tempoPrevisto, double valorUnitario, Status status) {
+    public Servico(String descricao, int tempoPrevisto, double valorUnitario) {
         count++;
         this.id = count;
         this.descricao = descricao;
         this.tempoPrevisto = tempoPrevisto;
         this.valorUnitario = valorUnitario;
-    }
-    public void setTempoReal(int tempoReal){
-        setTempoReal(this.tempoReal);
-    }
-    public int getTempoReal() {
-        return tempoReal;
+        this.tempoReal = 0;
     }
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getDescricao() {
@@ -49,6 +39,14 @@ public class OrdemExecutada {
         this.tempoPrevisto = tempoPrevisto;
     }
 
+    public int getTempoReal() {
+        return tempoReal;
+    }
+
+    public void setTempoReal(int tempoReal) {
+        this.tempoReal = tempoReal;
+    }
+
     public double getValorUnitario() {
         return valorUnitario;
     }
@@ -56,5 +54,16 @@ public class OrdemExecutada {
     public void setValorUnitario(double valorUnitario) {
         this.valorUnitario = valorUnitario;
     }
-    
+    public String getInfo() {
+        String relatorio =
+               "\n----------------------------------------" + 
+               "\nID: " + id +
+               "\n| Servico: " + descricao +
+               "\n | Tempo Previsto: " + tempoPrevisto +
+               "\n | Tempo Real: " + tempoReal +
+               "\n | Valor Servico: R$ " + valorUnitario +
+               "\n----------------------------------------"; 
+        
+        return relatorio;
+    }
 }

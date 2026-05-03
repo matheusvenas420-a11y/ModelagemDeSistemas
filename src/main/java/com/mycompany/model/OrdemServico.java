@@ -2,7 +2,6 @@ package com.mycompany.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 public class OrdemServico {
     private static int count;
@@ -13,7 +12,7 @@ public class OrdemServico {
     private LocalDate dataEntrega;
     private Status status;
     private Orcamento orcamento;
-    private final List<OrdemExecutada> servicos;
+    private final ArrayList<Servico> servicos;
     
     public enum Status {
         ABERTA,
@@ -39,7 +38,7 @@ public class OrdemServico {
         this.servicos = new ArrayList<>();
     }
     
-    public void addServico(OrdemExecutada e){
+    public void addServico(Servico e){
         this.servicos.add(e);
     }
     public void removeServico(int posicaoServico){
@@ -110,5 +109,29 @@ public class OrdemServico {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    
+    public void getInfo() {
+        System.out.println("===== ORDEM DE SERVICO =====");
+        System.out.println("ID: " + id);
+        System.out.println("Numero: " + numeroOS);
+        System.out.println("Descricão: " + descricao);
+        System.out.println("Valor Total: R$ " + valorTotal);
+        System.out.println("Status: " + status);
+        System.out.println("Data Abertura: " + dataAbertura);
+        System.out.println("Data Entrega: " + 
+            (dataEntrega != null ? dataEntrega : "Nao concluída"));
+
+        System.out.println("\n---- Servicos ----");
+
+        if(servicos.isEmpty()){
+            System.out.println("\nNenhum servico adicionado");
+        } else {
+            for(int i = 0; i < servicos.size(); i++){
+                System.out.println((i + 1) + " - " + servicos.get(i).getInfo());
+            }
+        }
+        System.out.println("\n---- Orcamento ----");
+        orcamento.getOrcamento();
+
+        System.out.println("\n============================");
+    }
 }
