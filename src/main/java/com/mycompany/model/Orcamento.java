@@ -18,7 +18,7 @@ public class Orcamento {
         this.valorMaoDeObra = valorMaoDeObra;
         this.valorPecas = calcularValorPecas();
     }
-    private double calcularValorPecas(){
+    public double calcularValorPecas(){
         double valordaPecas = 0;
         for (int i = 0; i < listaPecas.size(); i++) {
             valordaPecas += listaPecas.get(i).getValorPeca();
@@ -51,9 +51,9 @@ public class Orcamento {
         double totalPecas = calcularValorPecas();
         double total = valorMaoDeObra + totalPecas;
 
-        String relatorio = "===== ORÇAMENTO =====\n"
+        String relatorio = "===== ORCAMENTO =====\n"
                         +"Pecas: R$ " + totalPecas + "\n"
-                        +"Total Pecas: R$ " + total + "\n";
+                        +"Total Pecas + Mao de obra: R$ " + total + "\n";
 
         relatorio += "\nLista de Pecas:\n";
 
@@ -61,7 +61,7 @@ public class Orcamento {
             relatorio += "Nenhuma peca adicionada\n";
         } else {
             for (int i = 0; i < listaPecas.size(); i++) {
-                relatorio += i + " - " + listaPecas.get(i) + "\n";
+                relatorio += i + " - " + listaPecas.get(i).getNomePeca() + " | R$ " + listaPecas.get(i).getValorPeca() + "\n";
             }
         }
 
@@ -69,4 +69,37 @@ public class Orcamento {
 
         return relatorio;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public double getValorMaoDeObra() {
+        return valorMaoDeObra;
+    }
+
+    public void setValorMaoDeObra(double valorMaoDeObra) {
+        this.valorMaoDeObra = valorMaoDeObra;
+    }
+
+    public double getValorPecas() {
+        return valorPecas;
+    }
+
+    public void setValorPecas(double valorPecas) {
+        this.valorPecas = valorPecas;
+    }
+
+    public ArrayList<Pecas> getListaPecas() {
+        return listaPecas;
+    }
+
+    public void setListaPecas(ArrayList<Pecas> listaPecas) {
+        this.listaPecas = listaPecas;
+    }
+    
 }

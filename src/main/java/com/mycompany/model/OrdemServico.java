@@ -24,12 +24,11 @@ public class OrdemServico {
     private double valorTotal;
     private String descricao;
     
-    public OrdemServico(double valorTotal, String descricao) {
+    public OrdemServico(String descricao) {
         count++;
         this.id = count;
 
         this.numeroOS = "OS-" + id;
-        this.valorTotal = valorTotal;
         this.descricao = descricao;
 
         this.dataAbertura = LocalDate.now();
@@ -37,7 +36,13 @@ public class OrdemServico {
 
         this.servicos = new ArrayList<>();
     }
-    
+    private double calcularTotalServicos(){
+        double total = 0;
+        for (int i = 0; i < servicos.size(); i++) {
+            total += servicos.get(i).getValorUnitario();
+        }
+        return total;
+    }
     public void addServico(Servico e){
         this.servicos.add(e);
     }
@@ -47,9 +52,6 @@ public class OrdemServico {
         } else {
             System.out.println("Posição inválida!");
         }
-    }
-    public void listar(){
-        
     }
     public void executada(){
         this.status = Status.EXECUTADA;
@@ -109,28 +111,35 @@ public class OrdemServico {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+    public void setOrcamento(Orcamento orcamento) {
+        this.orcamento = orcamento;
+    }
     public void getInfo() {
         System.out.println("===== ORDEM DE SERVICO =====");
         System.out.println("ID: " + id);
         System.out.println("Numero: " + numeroOS);
-        System.out.println("Descricão: " + descricao);
-        System.out.println("Valor Total: R$ " + valorTotal);
+        System.out.println("Descricao: " + descricao);
+        System.out.println("Valor Total: R$ " + (valorTotal +orcamento.calcularValorPecas() + orcamento.getValorMaoDeObra() + calcularTotalServicos()));
         System.out.println("Status: " + status);
         System.out.println("Data Abertura: " + dataAbertura);
         System.out.println("Data Entrega: " + 
-            (dataEntrega != null ? dataEntrega : "Nao concluída"));
+            (dataEntrega != null ? dataEntrega : "Nao concluida"));
 
-        System.out.println("\n---- Servicos ----");
+        System.out.println("\n===== SERVICOS =====");
 
         if(servicos.isEmpty()){
-            System.out.println("\nNenhum servico adicionado");
+            System.out.println("Nenhum servico adicionado");
         } else {
             for(int i = 0; i < servicos.size(); i++){
-                System.out.println((i + 1) + " - " + servicos.get(i).getInfo());
+                System.out.println(servicos.get(i).getInfo());
             }
         }
-        System.out.println("\n---- Orcamento ----");
-        orcamento.getOrcamento();
+
+        if (orcamento != null) {
+            System.out.println(orcamento.getOrcamento());
+        } else {
+            System.out.println("Nenhum orcamento definido");
+        }
 
         System.out.println("\n============================");
     }
