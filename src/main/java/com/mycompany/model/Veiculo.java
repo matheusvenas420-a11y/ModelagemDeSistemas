@@ -1,5 +1,7 @@
 package com.mycompany.model;
 
+import java.util.ArrayList;
+
 public class Veiculo {
     private static int count;
     private int id;
@@ -9,6 +11,7 @@ public class Veiculo {
     private String modelo;
     private int ano;
     private double quilometragem;
+    private ArrayList<Servico> servicosFeitos;
 
     public Veiculo(String placa, String marca, String modelo, int ano, double quilometragem) {
         this.placa = placa;
@@ -18,6 +21,7 @@ public class Veiculo {
         this.quilometragem = quilometragem;
         count++;
         this.id = count;
+        this.servicosFeitos = new ArrayList<>();
     }
     
     public int getId() {
