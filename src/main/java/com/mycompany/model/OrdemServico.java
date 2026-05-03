@@ -10,6 +10,7 @@ public class OrdemServico {
     private String numeroOS;
     private LocalDate dataAbertura;
     private LocalDate dataEntrega;
+    private Veiculo veiculo;
     private Status status;
     private Orcamento orcamento;
     private final ArrayList<Servico> servicos;
@@ -30,12 +31,13 @@ public class OrdemServico {
 
         this.numeroOS = "OS-" + id;
         this.descricao = descricao;
-
+        
         this.dataAbertura = LocalDate.now();
         this.status = Status.ABERTA;
 
         this.servicos = new ArrayList<>();
     }
+    
     private double calcularTotalServicos(){
         double total = 0;
         for (int i = 0; i < servicos.size(); i++) {
@@ -114,6 +116,23 @@ public class OrdemServico {
     public void setOrcamento(Orcamento orcamento) {
         this.orcamento = orcamento;
     }
+
+    public Veiculo getVeiculo() {
+        return veiculo;
+    }
+
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculo = veiculo;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public void getInfo() {
         System.out.println("===== ORDEM DE SERVICO =====");
         System.out.println("ID: " + id);
@@ -134,13 +153,14 @@ public class OrdemServico {
                 System.out.println(servicos.get(i).getInfo());
             }
         }
-
+        
+        System.out.println(veiculo.getInfo());
+                
         if (orcamento != null) {
             System.out.println(orcamento.getOrcamento());
         } else {
             System.out.println("Nenhum orcamento definido");
         }
-
         System.out.println("\n============================");
     }
 }

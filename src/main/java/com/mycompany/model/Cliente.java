@@ -11,8 +11,16 @@ public class Cliente extends Pessoa{
         this.endereco = endereco;
         this.veiculos = new ArrayList<>();
     }
-    
-
+    public void addVeiculo(Veiculo v) {
+        this.veiculos.add(v);
+    }
+    public void removerVeiculo(int posicao) {
+        if (posicao >= 0 && posicao < veiculos.size()) {
+            veiculos.remove(posicao);
+        } else {
+            System.out.println("Posicao invalida");
+        }
+    }
     public String getEndereco() {
         return endereco;
     }
