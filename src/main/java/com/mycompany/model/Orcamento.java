@@ -47,12 +47,13 @@ public class Orcamento {
         listaPecas.remove(posicao);
         System.out.println("Peça removida com sucesso.");
     }
-    public String getOrcamento() {
+    public String getInfoOrcamento() {
         double totalPecas = calcularValorPecas();
         double total = valorMaoDeObra + totalPecas;
 
         String relatorio = "===== ORCAMENTO =====\n"
                         +"Pecas: R$ " + totalPecas + "\n"
+                        +"Mao de Obra: R$ " + valorMaoDeObra + "\n"
                         +"Total Pecas + Mao de obra: R$ " + total + "\n";
 
         relatorio += "\nLista de Pecas:\n";

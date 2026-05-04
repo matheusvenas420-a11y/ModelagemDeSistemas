@@ -10,6 +10,7 @@ public class OrdemServico {
     private String numeroOS;
     private LocalDate dataAbertura;
     private LocalDate dataEntrega;
+    private Cliente cliente;
     private Veiculo veiculo;
     private Status status;
     private Orcamento orcamento;
@@ -17,7 +18,7 @@ public class OrdemServico {
     
     public enum Status {
         ABERTA,
-        EXECUTADA,
+        EXECUCAO,
         CONCLUIDA,
         CANCELADA
     }
@@ -55,8 +56,8 @@ public class OrdemServico {
             System.out.println("Posição inválida!");
         }
     }
-    public void executada(){
-        this.status = Status.EXECUTADA;
+    public void execucao(){
+        this.status = Status.EXECUCAO;
     }
     public void concluir() {
         this.status = Status.CONCLUIDA;
@@ -66,6 +67,14 @@ public class OrdemServico {
         this.status = Status.CANCELADA;
     }
 
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+    
     public String getNumeroOS() {
         return numeroOS;
     }
@@ -134,17 +143,20 @@ public class OrdemServico {
     }
     
     public void getInfo() {
+        double total = calcularTotalServicos();
+        if (orcamento != null) {
+            total += orcamento.calcularValorPecas();
+            total += orcamento.getValorMaoDeObra();
+        }
         System.out.println("===== ORDEM DE SERVICO =====");
         System.out.println("ID: " + id);
         System.out.println("Numero: " + numeroOS);
         System.out.println("Descricao: " + descricao);
-        System.out.println("Valor Total: R$ " + (valorTotal +orcamento.calcularValorPecas() + orcamento.getValorMaoDeObra() + calcularTotalServicos()));
+        System.out.println("Valor Total: R$ " + total);
         System.out.println("Status: " + status);
         System.out.println("Data Abertura: " + dataAbertura);
         System.out.println("Data Entrega: " + 
             (dataEntrega != null ? dataEntrega : "Nao concluida"));
-
-        System.out.println("\n===== SERVICOS =====");
 
         if(servicos.isEmpty()){
             System.out.println("Nenhum servico adicionado");
@@ -153,11 +165,11 @@ public class OrdemServico {
                 System.out.println(servicos.get(i).getInfo());
             }
         }
-        
-        System.out.println(veiculo.getInfo());
+        System.out.println(cliente.getInfoCliente());
+        System.out.println(veiculo.getInfoVeiculo());
                 
         if (orcamento != null) {
-            System.out.println(orcamento.getOrcamento());
+            System.out.println(orcamento.getInfoOrcamento());
         } else {
             System.out.println("Nenhum orcamento definido");
         }

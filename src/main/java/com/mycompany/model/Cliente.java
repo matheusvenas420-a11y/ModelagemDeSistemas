@@ -29,4 +29,17 @@ public class Cliente extends Pessoa{
         this.endereco = endereco;
     }
     
+    public String getInfoCliente(){
+        String info = "===== CLIENTE =====\n";
+        info += "Nome: " + this.getNome() + "\n";
+        info += "Cpf: " + this.getCpf() + "\n";
+        info += "Telefone: " + this.getTelefone() + "\n";
+        if(endereco != null){
+            info += "Endereco: " + this.getEndereco() + "\n";
+        }else{
+            info += "Endereco: Nao Infomado" + "\n";
+        }
+        info += "\n----------------------------------------";
+        return info;
+    }
 }

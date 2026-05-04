@@ -1,17 +1,30 @@
 package com.mycompany.model;
 
 public class Mecanico extends Funcionario{
-    protected String especalidade; 
+    private static int count;
+    private String id;
+    protected String especialidade;
 
-    public Mecanico(double salario, String cargo) {
-        super(salario, cargo);
+    public Mecanico(double salario,String especialidade) {
+        super(salario);
+        this.especialidade = especialidade;
+        count++;
+        this.id = "ME-" + count;
+    }
+    
+    public String getId() {
+        return id;
     }
 
-    public String getEspecalidade() {
-        return especalidade;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setEspecalidade(String especalidade) {
-        this.especalidade = especalidade;
+    public String getEspecialidade() {
+        return especialidade;
+    }
+
+    public void setEspecialidade(String especialidade) {
+        this.especialidade = especialidade;
     }
 }

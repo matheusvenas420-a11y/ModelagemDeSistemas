@@ -72,7 +72,7 @@ public class Veiculo {
         this.quilometragem = quilometragem;
     }
     
-    public String getInfo() {
+    public String getInfoVeiculo() {
         String info = "===== VEICULO =====\n";
         info += "ID: " + id + "\n";
         info += "Placa: " + placa + "\n";
